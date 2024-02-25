@@ -27,6 +27,8 @@
         <button onclick="createChampion()">Créer le champion</button>
     </form>
 
+    <div class="champions"></div>
+
 
     <script>
         const createChampion = async () => {
@@ -44,6 +46,22 @@
             })
             window.location.href = `index.html`;
         }
+
+
+        fetch(`http://localhost:3000/champions`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            let champions = document.querySelector('.champions');
+            data.forEach(champion => {
+                let championDiv = document.createElement('div');
+                championDiv.innerHTML = `
+                    <h2>${champion.name}</h2>
+                    <p>${champion.type}</p>
+                `;
+                champions.appendChild(championDiv);
+            })
+        })
     </script>
 </body>
 </html>

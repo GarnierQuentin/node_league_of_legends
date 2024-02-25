@@ -19,4 +19,16 @@ const createChampion = (req, res) => {
 };
 
 
-export { createChampion };
+
+const getChampions = (req, res) => {
+    prisma.champion.findMany()
+    .then((champions) => {
+        res.json(champions);
+    })
+    .catch((error) => {
+        res.json({error: error.message});
+    });
+}
+
+
+export { createChampion, getChampions };
