@@ -49,4 +49,28 @@ const getSingleChampion = (req, res) => {
 }
 
 
-export { createChampion, getChampions, getSingleChampion };
+
+
+const updateChampion = (req, res) => {
+    let id = Number(req.params.id);
+    let champion = req.body;
+
+    prisma.champion.update({
+        where: {
+            id: id,
+        },
+        data: {
+            name: champion.name,
+            type: champion.type,
+        },
+    })
+    .then(champion => {
+        res.json(champion);
+    })
+    .catch(error => {
+        res.json({error: error.message});
+    });
+}
+
+
+export { createChampion, getChampions, getSingleChampion, updateChampion };
