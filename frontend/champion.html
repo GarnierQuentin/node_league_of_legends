@@ -8,6 +8,7 @@
 <body>
 
     <div class="id"></div>
+    <button onclick="deleteChampion()">Supprimer le champion</button>
 
     <script>
         let url = window.location.search
@@ -27,6 +28,13 @@
                 <a href="index.html">Retour</a>
             `
         })
+
+        const deleteChampion = async () => {
+            await fetch(`http://localhost:3000/champions/${id}`, {
+                method: 'DELETE'
+            })
+            window.location.href = `index.html`;
+        }
     </script>
     
 </body>

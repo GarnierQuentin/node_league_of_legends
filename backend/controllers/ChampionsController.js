@@ -73,4 +73,21 @@ const updateChampion = (req, res) => {
 }
 
 
-export { createChampion, getChampions, getSingleChampion, updateChampion };
+const deleteChampion = (req, res) => {
+    let id = Number(req.params.id);
+
+    prisma.champion.delete({
+        where: {
+            id: id,
+        },
+    })
+    .then(champion => {
+        res.json(champion);
+    })
+    .catch(error => {
+        res.json({error: error.message});
+    });
+}
+
+
+export { createChampion, getChampions, getSingleChampion, updateChampion, deleteChampion };
