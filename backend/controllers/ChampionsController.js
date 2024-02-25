@@ -31,4 +31,22 @@ const getChampions = (req, res) => {
 }
 
 
-export { createChampion, getChampions };
+
+const getSingleChampion = (req, res) => {
+    let id = Number(req.params.id);
+
+    prisma.champion.findUnique({
+        where: {
+            id: parseInt(id),
+        },
+    })
+    .then((champion) => {
+        res.json(champion);
+    })
+    .catch((error) => {
+        res.json({error: error.message});
+    });
+}
+
+
+export { createChampion, getChampions, getSingleChampion };
